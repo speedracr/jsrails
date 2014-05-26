@@ -17,16 +17,23 @@ function add_image(link){
   $("#images").append('<img src="' + link + '" />')
 }
 
+// function process_response(data){
+//   d = data;
+//   console.log(data);
+
+//   link = photo_image_url(data.photos.photo[0])
+//   console.log(link);
+
+//   add_image(link);
+// }
+
 function process_response(data){
-  d = data;
-  console.log(data);
-
-  link = photo_image_url(data.photos.photo[0])
-  console.log(link);
-
-  add_image(link);
+  data.photos.photo.forEach(function(photo) {
+    var url = photo_image_url(photo);
+    add_image(url);
+  })
 }
 
 
-url = flickr_api_url("sushi");
+url = flickr_api_url("robots");
 $.getJSON(url, process_response);
